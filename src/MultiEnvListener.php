@@ -36,7 +36,7 @@ class MultiEnvListener implements ListenerInterface
      */
     public function process(object $event)
     {
-        $env = env('APP_ENV', 'testing');
+        $env = env('APP_ENV');
 
         if ($env !== null && file_exists($envPath = BASE_PATH . '/.env.' . $env) && ApplicationContext::hasContainer()) {
             $container = ApplicationContext::getContainer();
