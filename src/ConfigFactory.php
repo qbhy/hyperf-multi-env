@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Qbhy\HyperfMultiEnv;
 
 use Dotenv\Dotenv;
+use Hyperf\Config\ProviderConfig;
 use Symfony\Component\Finder\Finder;
 
 class ConfigFactory
@@ -29,7 +30,7 @@ class ConfigFactory
         $serverConfig = $this->readConfig($configPath . 'server.php');
         $autoloadConfig = $this->readPaths([BASE_PATH . '/config/autoload']);
 
-        return array_merge_recursive($serverConfig, $config, ...$autoloadConfig);
+        return array_merge_recursive(ProviderConfig::load(), $serverConfig, $config, ...$autoloadConfig);
     }
 
     private function readConfig(string $configPath): array

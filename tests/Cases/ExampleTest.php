@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases;
 
+use Dotenv\Dotenv;
+
 /**
  * @internal
  * @coversNothing
@@ -23,5 +25,13 @@ class ExampleTest extends AbstractTestCase
         $this->assertTrue(true);
 
         $this->assertTrue(extension_loaded('swoole'));
+    }
+
+    public function testOverrideEnv()
+    {
+        Dotenv::create([BASE_PATH])->load();
+        $this->assertTrue(env('APP_NAME') === 'default');
+        Dotenv::create([BASE_PATH], '.env.'.env('APP_ENV'))->overload();
+        $this->assertTrue(env('APP_NAME') === 'testing');
     }
 }

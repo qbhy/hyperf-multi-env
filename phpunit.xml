@@ -12,4 +12,7 @@
     <testsuite name="Testsuite">
         <directory>./tests/</directory>
     </testsuite>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+    </php>
 </phpunit>
