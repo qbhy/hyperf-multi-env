@@ -13,8 +13,10 @@ declare(strict_types=1);
 namespace Qbhy\HyperfMultiEnv;
 
 use Dotenv\Dotenv;
+use Dotenv\Repository\RepositoryBuilder;
 use Hyperf\Config\ProviderConfig;
 use Symfony\Component\Finder\Finder;
+use Dotenv\Repository\Adapter;
 
 class ConfigFactory
 {
@@ -22,7 +24,17 @@ class ConfigFactory
     {
         // Load env before config.
         if (file_exists(BASE_PATH . '/.env.' . $env)) {
-            Dotenv::create([BASE_PATH], '.env.' . $env)->overload();
+            $repository = RepositoryBuilder::create()
+                ->withReaders([
+                    new Adapter\PutenvAdapter(),
+                ])
+                ->withWriters([
+                    new Adapter\PutenvAdapter(),
+                ])
+                ->immutable()
+                ->make();
+
+            Dotenv::create($repository, [BASE_PATH], '.env.' . $env)->load();
         }
 
         $configPath = BASE_PATH . '/config/';

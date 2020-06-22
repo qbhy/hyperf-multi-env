@@ -7,10 +7,10 @@ $ composer require qbhy/hyperf-multi-env
 ```
 
 ## 使用 - usage
-只需要启动的时候设置 APP_ENV 配置，扩展包就会自动根据 env 来查找 env 文件并且覆盖原有的 `.env` 文件配置。
+只需要启动的时候设置 APP_ENV 配置，扩展包就会自动根据 env 来查找 env 文件配置。
 
-比如 APP_ENV 为 `testing` 那么会加载 `.env.testing` 来替换已有的 `.env` 文件配置。
-> `.env.testing` 没有的配置，还是会使用 `.env` 文件的配置来加载。
+比如 APP_ENV 为 `testing` 那么会加载 `.env.testing` 文件配置。
+> `.env.testing` 没有的配置，还是会使用 `.env` 文件的配置来加载。所以建议 .env 放共有的配置。
 
 ## 示例 - examples
 * 通过 `.env` 配置
