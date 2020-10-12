@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace HyperfTest\Cases;
 
 use Dotenv\Dotenv;
+use Dotenv\Repository\RepositoryBuilder;
+use Dotenv\Repository\Adapter;
 
 /**
  * @internal
@@ -29,9 +31,19 @@ class ExampleTest extends AbstractTestCase
 
     public function testOverrideEnv()
     {
-        Dotenv::create([BASE_PATH])->load();
+        $repository = RepositoryBuilder::create()
+            ->withReaders([
+                new Adapter\PutenvAdapter(),
+            ])
+            ->withWriters([
+                new Adapter\PutenvAdapter(),
+            ])
+            ->make();
+
+        Dotenv::create($repository,[BASE_PATH])->load();
         $this->assertTrue(env('APP_NAME') === 'default');
-        Dotenv::create([BASE_PATH], '.env.'.env('APP_ENV'))->overload();
+        Dotenv::create($repository, [BASE_PATH], '.env.'.env('APP_ENV'))->load();
         $this->assertTrue(env('APP_NAME') === 'testing');
+        $this->assertTrue(env('DB_DATABASE') === 'demo_test');
     }
 }

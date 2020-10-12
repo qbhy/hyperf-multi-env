@@ -31,7 +31,6 @@ class ConfigFactory
                 ->withWriters([
                     new Adapter\PutenvAdapter(),
                 ])
-                ->immutable()
                 ->make();
 
             Dotenv::create($repository, [BASE_PATH], '.env.' . $env)->load();
