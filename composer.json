@@ -23,12 +23,11 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.14",
-        "hyperf/testing": "^2.0",
-        "hyperf/di": "^2.0",
+        "hyperf/testing": "^2.1",
+        "hyperf/di": "^2.1",
         "phpstan/phpstan": "^0",
-        "swoft/swoole-ide-helper": "dev-master",
-        "vlucas/phpdotenv": "^4.0",
-        "hyperf/config":  "^2.0"
+        "vlucas/phpdotenv": "^5.0",
+        "hyperf/config":  "^2.1"
     },
     "config": {
         "sort-packages": true
