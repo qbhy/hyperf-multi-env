@@ -31,13 +31,9 @@ class ExampleTest extends AbstractTestCase
 
     public function testOverrideEnv()
     {
-        $repository = RepositoryBuilder::create()
-            ->withReaders([
-                new Adapter\PutenvAdapter(),
-            ])
-            ->withWriters([
-                new Adapter\PutenvAdapter(),
-            ])
+        $repository = RepositoryBuilder::createWithNoAdapters()
+            ->addAdapter(Adapter\PutenvAdapter::class)
+            ->addWriter(Adapter\PutenvAdapter::class)
             ->make();
 
         Dotenv::create($repository,[BASE_PATH])->load();
