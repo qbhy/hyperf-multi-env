@@ -12,11 +12,12 @@ declare(strict_types=1);
 
 namespace Qbhy\HyperfMultiEnv;
 
+use Hyperf\Context\ApplicationContext;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Framework\Event\BootApplication;
-use Hyperf\Utils\ApplicationContext;
+use function Hyperf\Support\env;
 
 /**
  * @Listener
@@ -34,7 +35,7 @@ class MultiEnvListener implements ListenerInterface
     /**
      * @param BootApplication $event
      */
-    public function process(object $event)
+    public function process(object $event): void
     {
         $env = env('APP_ENV');
 
